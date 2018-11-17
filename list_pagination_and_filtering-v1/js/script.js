@@ -17,11 +17,8 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
-//Determine number of students in list
-let numberOfStudents = document.getElementsByClassName('student-item').length;
-
 //Retrive full list of Students
-let studentList = document.getElementsByClassName('student-item');
+let studentList = document.getElementsByClassName('student-item cf');
 
 
 /***
@@ -39,16 +36,17 @@ let studentList = document.getElementsByClassName('student-item');
        "invoke" the function
 ***/
 
-const showPage = (list, page) => {
-  for (i=0; i < numberOfStudents; i++)
+const showPage = () => {
+  for (i=0; i < studentList.length; i++)
     if (
-        i > 10) {
+        i > 9) {
           studentList[i].style.display = 'none';
         } else {
           studentList[i].style.display = 'block';
         }
 };
 
+showPage();
 
 /***
    Create the `appendPageLinks function` to generate, append, and add
