@@ -20,6 +20,7 @@ FSJS project 2 - List Filter and Pagination
 //Retrive full list of Students
 let studentList = document.getElementsByClassName('student-item cf');
 
+//Mabey add groupUpper and groupLower variables
 
 /***
    Create the `showPage` function to hide all of the items in the
@@ -46,7 +47,40 @@ const showPage = () => {
         }
 };
 
+const appendPageLinks = () => {
+  //Determines overall nuber of pages required based on number of students in list
+  const requiredPages = Math.ceil(studentList.length / 10);
+
+  //Creates new div and new class "pagination"
+  //need to fix variables, should probably be global
+  const pageDiv = document.createElement("div");
+  const page = document.body.querySelector('.page');
+  pageDiv.className = "pagination";
+  page.appendChild(pageDiv);
+
+  let ulPagination = document.createElement('ul');
+  pageDiv.append(ulPagination);
+
+//Loop adds UL, li, and a to the page
+let pageCounter = 1;
+for (let i = 0; i < requiredPages; i++) {
+  let li = document.createElement('li');
+  let a = document.createElement('a');
+  a.textContent = pageCounter;
+  ulPagination.appendChild(li);
+  li.innerHTML = `<a href="#" class="">${pageCounter}</a>`;
+
+  //unsure if this needs to be a seperate loop or not
+  a.addEventListener('click', () => {
+    a.style.backgroundColor = "#A9A9A9";
+  });
+  pageCounter ++;
+}
+
+};
+
 showPage();
+appendPageLinks();
 
 /***
    Create the `appendPageLinks function` to generate, append, and add
