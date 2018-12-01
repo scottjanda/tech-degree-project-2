@@ -19,7 +19,8 @@ FSJS project 2 - List Filter and Pagination
 
 //Retrive full list of Students
 let studentList = document.getElementsByClassName('student-item cf');
-
+let pageDisplay = 2;
+let pageCounter = 0;
 //Mabey add groupUpper and groupLower variables
 
 /***
@@ -40,7 +41,7 @@ let studentList = document.getElementsByClassName('student-item cf');
 const showPage = () => {
   for (i=0; i < studentList.length; i++)
     if (
-        i > 9) {
+        i > 9 * pageDisplay) {
           studentList[i].style.display = 'none';
         } else {
           studentList[i].style.display = 'block';
@@ -52,7 +53,6 @@ const appendPageLinks = () => {
   const requiredPages = Math.ceil(studentList.length / 10);
 
   //Creates new div and new class "pagination"
-  //need to fix variables, should probably be global
   const pageDiv = document.createElement("div");
   const page = document.body.querySelector('.page');
   pageDiv.className = "pagination";
@@ -62,7 +62,7 @@ const appendPageLinks = () => {
   pageDiv.append(ulPagination);
 
 //Loop adds UL, li, and a to the page
-let pageCounter = 1;
+
 for (let i = 0; i < requiredPages; i++) {
   let li = document.createElement('li');
   let a = document.createElement('a');
@@ -72,7 +72,10 @@ for (let i = 0; i < requiredPages; i++) {
 
   //unsure if this needs to be a seperate loop or not
   a.addEventListener('click', () => {
-    a.style.backgroundColor = "#A9A9A9";
+    pageDisplay = pageCounter;
+    showPage();
+
+    //a.style.backgroundColor = "#A9A9A9";
   });
   pageCounter ++;
 }
