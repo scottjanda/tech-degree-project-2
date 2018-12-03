@@ -19,9 +19,14 @@ FSJS project 2 - List Filter and Pagination
 
 //Retrive full list of Students
 let studentList = document.getElementsByClassName('student-item cf');
-let pageDisplay = 2;
+//Determines initial page to display
+let pageDisplay = 1;
+//Number of buttons to add
 let pageCounter = 0;
-//Mabey add groupUpper and groupLower variables
+//First button
+let a = 0;
+//Determines overall nuber of pages required based on number of students in list
+const requiredPages = Math.ceil(studentList.length / 10);
 
 /***
    Create the `showPage` function to hide all of the items in the
@@ -38,10 +43,12 @@ let pageCounter = 0;
        "invoke" the function
 ***/
 
+//Displays the appropriate students in the list and hides the rest
 const showPage = () => {
+  console.log(pageDisplay);
   for (i=0; i < studentList.length; i++)
     if (
-        i > 9 * pageDisplay) {
+        i > 10 * pageDisplay) {
           studentList[i].style.display = 'none';
         } else {
           studentList[i].style.display = 'block';
@@ -49,41 +56,41 @@ const showPage = () => {
 };
 
 const appendPageLinks = () => {
-  //Determines overall nuber of pages required based on number of students in list
-  const requiredPages = Math.ceil(studentList.length / 10);
+
 
   //Creates new div and new class "pagination"
   const pageDiv = document.createElement("div");
   const page = document.body.querySelector('.page');
   pageDiv.className = "pagination";
   page.appendChild(pageDiv);
-
   let ulPagination = document.createElement('ul');
   pageDiv.append(ulPagination);
 
-//Loop adds UL, li, and a to the page
-
-for (let i = 0; i < requiredPages; i++) {
-  let li = document.createElement('li');
-  let a = document.createElement('a');
-  a.textContent = pageCounter;
-  ulPagination.appendChild(li);
-  li.innerHTML = `<a href="#" class="">${pageCounter}</a>`;
-
-  //unsure if this needs to be a seperate loop or not
-  a.addEventListener('click', () => {
-    pageDisplay = pageCounter;
-    showPage();
-
-    //a.style.backgroundColor = "#A9A9A9";
-  });
-  pageCounter ++;
-}
-
+  //Loop adds UL, li, and a to the page
+  for (let i = 0; i < requiredPages; i++) {
+    let li = document.createElement('li');
+    let a = document.createElement('a');
+    a.textContent = pageCounter;
+    ulPagination.appendChild(li);
+    li.innerHTML = `<a href="#" class="">${pageCounter}</a>`;
+    pageCounter ++;
+  };
 };
+
+  // for (let i = 0; i < requiredPages; i++) {
+  //   document.a.[i].addEventListener('click', (e) => {
+  //     console.log(pageCounter);
+  //     pageDisplay = e.target.textContent;
+  //     // console.log(pageDisplay);
+  //     // console.log(e.target);
+  //     showPage(pageDisplay);
+  //     a.style.backgroundColor = "#A9A9A9";
+  //     });
+  //   };
 
 showPage();
 appendPageLinks();
+
 
 /***
    Create the `appendPageLinks function` to generate, append, and add
