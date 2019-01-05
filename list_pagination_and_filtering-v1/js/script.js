@@ -22,11 +22,13 @@ let studentList = document.getElementsByClassName('student-item cf');
 //Determines initial page to display
 let pageDisplay = 1;
 //Number of buttons to add
-let pageCounter = 0;
+let pageCounter = 1;
 //First button
 let a = 0;
 //Determines overall nuber of pages required based on number of students in list
 const requiredPages = Math.ceil(studentList.length / 10);
+//Holds
+const pageDiv = document.createElement("div");
 
 /***
    Create the `showPage` function to hide all of the items in the
@@ -59,7 +61,6 @@ const appendPageLinks = () => {
 
 
   //Creates new div and new class "pagination"
-  const pageDiv = document.createElement("div");
   const page = document.body.querySelector('.page');
   pageDiv.className = "pagination";
   page.appendChild(pageDiv);
@@ -77,16 +78,11 @@ const appendPageLinks = () => {
   };
 };
 
-  // for (let i = 0; i < requiredPages; i++) {
-  //   document.a.[i].addEventListener('click', (e) => {
-  //     console.log(pageCounter);
-  //     pageDisplay = e.target.textContent;
-  //     // console.log(pageDisplay);
-  //     // console.log(e.target);
-  //     showPage(pageDisplay);
-  //     a.style.backgroundColor = "#A9A9A9";
-  //     });
-  //   };
+pageDiv.addEventListener('click', (e) => {
+  console.log(pageCounter);
+  let pageDisplay = e.target.textContent;
+  showPage();
+  });
 
 showPage();
 appendPageLinks();
